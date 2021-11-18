@@ -1,5 +1,6 @@
 package br.com.zup.Relacionamentos.turma;
 
+import br.com.zup.Relacionamentos.turma.dtos.CadastrarTumaDTO;
 import br.com.zup.Relacionamentos.turma.dtos.MatriculaDTO;
 import br.com.zup.Relacionamentos.turma.dtos.TurmaEntradaDTO;
 import org.modelmapper.ModelMapper;
@@ -23,7 +24,8 @@ public class TurmaController {
     }
 
     @PutMapping
-    public Turma matricularAluno(@RequestBody MatriculaDTO matricula){
-        return turmaService.vincularAlunoNaTurma(matricula.getAlunoId(), matricula.getTurmaId());
+    public CadastrarTumaDTO matricularAluno(@RequestBody MatriculaDTO matricula){
+       Turma turma = turmaService.vincularAlunoNaTurma(matricula.getAlunoId(), matricula.getTurmaId());
+        return modelMapper.map(turma, CadastrarTumaDTO.class);
     }
 }
